@@ -3,19 +3,54 @@
 <head>
     <title>Office map</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/19.2.6/css/dx.common.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/19.2.6/css/dx.light.css" />
     <!-- users scripts and styles -->
     <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <script src="https://kit.fontawesome.com/ac9340c766.js" crossorigin="anonymous"></script>
 </head>
 <body class="dx-viewport">
-    <nav>
-        <a href="#!main">Main</a>
-        <a href="#!map">Map</a>
-    </nav>
-    <ng-view></ng-view>     
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+
+                <div class="user">
+                    <div class="user__avatar">
+                        <img src="Https://placehold.it/57/fff" alt="">
+                    </div>
+                    <div class="user__content">
+                        <div class="user__name">
+                            Name <br> Sername
+                        </div>
+                        <div class="user__prof">
+                            [Competencies]
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search">
+                    <form>
+                        <input class="search__input" type="text" placeholder="Поиск...">
+                        <button class="search__button" type="submit"></button>
+                    </form>    
+                </div>
+
+               
+                <div class="logo"></div>              
+
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <a class="nav__link" href="#!main">Main</a>
+        <a class="nav__link" href="#!map">Map</a>            
+    </nav> 
+    <ng-view></ng-view>    
+     
     <script src="scripts/lib/angular.min.js"></script>
     <script src="scripts/lib/angular-route.min.js"></script>
     <script src="https://cdn3.devexpress.com/jslib/19.2.6/js/dx.all.js"></script>
