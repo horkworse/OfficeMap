@@ -1,11 +1,14 @@
 let slide = () =>{
     let user = document.querySelector('.user');
     let close = document.querySelector('.sideBar__close');
+    // let cont = document.querySelector('.nav');
     let sideBar = document.querySelector('.sideBar__inner');
     let slideLinks = document.querySelectorAll('.sideBar__links li');
 
 
     user.addEventListener('click', () => {
+        // cont.classList.toggle('nav-active');
+
         newFunction(sideBar, slideLinks);
     });  
 
