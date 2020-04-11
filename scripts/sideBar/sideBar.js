@@ -8,20 +8,19 @@ let slide = () =>{
 
     user.addEventListener('click', () => {
         // cont.classList.toggle('nav-active');
-
-        newFunction(sideBar, slideLinks);
+        slideFunction(sideBar, slideLinks);
     });  
 
     //Повторение кода, знаю, потом подумаю как избавится, а может просто избавлюсь от крестика
     close.addEventListener('click', () => {
-        newFunction(sideBar, slideLinks);
+        slideFunction(sideBar, slideLinks);
     }); 
 
 }
 
 slide();
 
-function newFunction(sideBar, slideLinks) {
+function slideFunction(sideBar, slideLinks) {
     sideBar.classList.toggle('sideBar-active');
     slideLinks.forEach((link, index) => {
         if (link.style.animation) {
