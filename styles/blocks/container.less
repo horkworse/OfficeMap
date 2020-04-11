@@ -3,7 +3,13 @@
 .container{
     width: 100%;
     max-width: inherit;
+    min-width: 320px;
     margin: 0 auto;
     padding-left: 2rem;
     padding-right: 2rem;
+
+    @media (max-width: 768px){
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
 }

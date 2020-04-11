@@ -9,10 +9,11 @@
     <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/19.2.6/css/dx.common.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/19.2.6/css/dx.light.css" />
     <!-- users scripts and styles -->
-    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="styles/main.css" />
     <script src="https://kit.fontawesome.com/ac9340c766.js" crossorigin="anonymous"></script>
 </head>
 <body class="dx-viewport">
+
     <header class="header">
         <div class="container">
             <div class="header__inner">
@@ -37,20 +38,55 @@
                         <button class="search__button" type="submit"></button>
                     </form>    
                 </div>
-
-               
+        
                 <div class="logo"></div>              
 
             </div>
         </div>
     </header>
 
-    <nav class="nav">
+    <div class="sideBar"> 
+        <div class="container">
+            <div class="sideBar__inner">
+
+                <div class="sideBar__close">
+                    <i class="fas fa-times"></i>
+                </div>
+
+                <div class="sideBar__user">
+                    <img src="Https://placehold.it/230/000000" alt="">
+                    <p>Name Sername</p>
+                    <p>[Competencies]</p>
+                </div>
+    
+                <ul class="sideBar__links">
+                    <li>
+                        <p><i class="far fa-envelope"></i> Email</p>
+                    </li>
+                    <li>
+                        <p><i class="fas fa-phone-alt"></i> Phone</p>
+                    </li>
+                    <li>
+                        <p><i class="fas fa-briefcase"></i> Employment</p>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fab fa-vk"></i> Social</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>       
+    </div>
+    
+
+    <nav class="nav content">
         <a class="nav__link" href="#!main">Main</a>
         <a class="nav__link" href="#!map">Map</a>            
     </nav> 
     <ng-view></ng-view>    
-     
+
+
+    <script src="/scripts/sideBar/sideBar.js"></script> 
     <script src="scripts/lib/angular.min.js"></script>
     <script src="scripts/lib/angular-route.min.js"></script>
     <script src="https://cdn3.devexpress.com/jslib/19.2.6/js/dx.all.js"></script>

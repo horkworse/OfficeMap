@@ -3,8 +3,13 @@
 /*Header*/
 .header{
     padding: 1rem 0;
+
     background-color: @black;
     color: @white;
+
+    position: relative;
+
+    z-index: 3;
 }
 
 .header__inner{
@@ -34,27 +39,40 @@
 
 .user__name{
     margin-bottom: 3px;
+
     font-size: 1.06rem;
     font-weight: 700;
     line-height: 1.2;
+
+    @media (max-width: 768px){
+        display: none;
+    }
 }
 
 .user__prof{
     font-size: 0.8rem;
     color: fade(@white, 70%);
+
+    @media (max-width: 768px){
+        display: none;
+    }
 }
 
 /*Logo*/
 .logo{
-    background-image: url(/images/logo.png);
+    background-image: @logoUrl;
     background-size: cover;
 
     width: @logo-w;
     height: @logo-h;
+
+    @media (max-width: 992px){
+        display: none;
+    }
 }
 
 /*Search*/
-form{
+.search{
     position: relative;
     width: 40rem;
 }
@@ -91,5 +109,6 @@ form{
         font-family: FontAwesome;
         font-size: 1.2rem;
         color: @white;
+        mix-blend-mode: difference;
     }
 }

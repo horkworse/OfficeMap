@@ -1,8 +1,14 @@
 //compress: true
 @import "vars";
 
+* * {
+	margin: 0;
+	padding: 0;	
+}
+
 html{
     font-size: 15px;
+    overflow-y: hidden;
 }
 
 body{
@@ -15,8 +21,12 @@ body{
 *:before,
 *:after{
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
 
 /* Blocks */
 @import "blocks/header";
 @import "blocks/container";
+@import "blocks/map";
+@import "blocks/sideBar";
