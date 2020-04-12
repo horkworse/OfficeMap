@@ -85,17 +85,17 @@
     @media (max-width: 768px){
         padding-bottom: 0.5rem;
     }
-}
 
-.sideBar__user p:last-child{
-    padding-bottom: 4rem;
+    &:last-child{
+        padding-bottom: 3.5rem;
 
-    @media (max-width: 768px){
-        padding-bottom: 3rem;
-    }
-
-    @media (max-width: 320px) {
-        padding-bottom: 1.5rem;
+        @media (max-width: 768px){
+            padding-bottom: 3rem;
+        }
+    
+        @media (max-width: 360px) {
+            padding-bottom: 1.5rem;
+        }
     }
 }
 
@@ -119,11 +119,29 @@
         
         font-size: 1.2rem;
     }
+
+    &:last-child{
+        padding-bottom: 0rem;
+    }
 }
+
 
 .sideBar__links li a{
     text-decoration: none;
     color: black;
+}
+
+/*edit*/
+.sideBar__user__edit{
+    font-size: 1.7rem;
+
+    margin-top: 0.5rem;
+    padding-right: 0.5rem;
+
+    display: flex;
+    justify-content: flex-end;
+
+    cursor: pointer;
 }
 
 .sideBar-active{
@@ -140,3 +158,5 @@
         transform: translateY(0px);
     }
 }
+
+

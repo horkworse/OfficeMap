@@ -74,21 +74,46 @@
                     </li>
                 </ul>
 
+                <div class="sideBar__user__edit">
+                    <i class="far fa-edit"></i>
+                </div>
+
             </div>
         </div>       
     </div>
-    
 
     <div class="content">
-        <div class="demo-container">
+        <!-- <div class="demo-container">
             <div id="vector-map" dx-vector-map="vectorMapOptions"></div>
-        </div>
+        </div> -->
     </div>
     <!-- <nav class="nav">
         <a class="nav__link" href="#!main">Main</a>
         <a class="nav__link" href="#!map">Map</a>            
     </nav>  -->
-    <ng-view></ng-view>    
+    <ng-view></ng-view>  
+    
+
+    <form id="signForm" action="">
+        <div class="block">
+            <div class="icon">
+                <svg viewbox="1 1 8 8">
+                    <path d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z" fill="darkblue" />
+                </svg><i class="fas fa-user signImg"></i>
+            </div>
+            <input type="text" placeholder="Username" class="login">
+        </div>
+        <div class="block">
+            <div class="icon">
+                <svg viewbox="1 1 8 8">
+                    <path d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z" fill="darkblue" />
+                </svg><i class="fas fa-key signImg"></i>
+            </div>
+            <input type="password" placeholder="Password" class="login">
+        </div>
+        <input type="button" value="Sign in">
+    </form>
+    
 
 
     <script src="/scripts/sideBar/sideBar.js"></script> 
