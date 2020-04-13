@@ -3,124 +3,26 @@
 <head>
     <title>Office map</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/19.2.6/css/dx.common.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/19.2.6/css/dx.light.css" />
+    <script src="https://kit.fontawesome.com/ac9340c766.js" crossorigin="anonymous"></script>
     <!-- users scripts and styles -->
     <link rel="stylesheet" type="text/css" href="styles/main.css" />
-    <script src="https://kit.fontawesome.com/ac9340c766.js" crossorigin="anonymous"></script>
 </head>
 <body class="dx-viewport">
 
-    <header class="header">
-        <div class="container">
-            <div class="header__inner">
-
-                <div class="user">
-                    <div class="user__avatar">
-                        <img src="Https://placehold.it/57/fff" alt="">
-                    </div>
-                    <div class="user__content">
-                        <div class="user__name">
-                            Name <br> Sername
-                        </div>
-                        <div class="user__prof">
-                            [Competencies]
-                        </div>
-                    </div>
-                </div>
-
-                <div class="search">
-                    <form>
-                        <input class="search__input" type="text" placeholder="Поиск...">
-                        <button class="search__button" type="submit"></button>
-                    </form>    
-                </div>
-        
-                <div class="logo"></div>              
-
-            </div>
-        </div>
-    </header>
-
-    <div class="sideBar"> 
-        <div class="container">
-            <div class="sideBar__inner">
-
-                <div class="sideBar__close">
-                    <i class="fas fa-times"></i>
-                </div>
-
-                <div class="sideBar__user">
-                    <img src="Https://placehold.it/230/000000" alt="">
-                    <p>Name Sername</p>
-                    <p>[Competencies]</p>
-                </div>
+    <ng-view></ng-view>
     
-                <ul class="sideBar__links">
-                    <li>
-                        <p><i class="far fa-envelope"></i> Email</p>
-                    </li>
-                    <li>
-                        <p><i class="fas fa-phone-alt"></i> Phone</p>
-                    </li>
-                    <li>
-                        <p><i class="fas fa-briefcase"></i> Employment</p>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fab fa-vk"></i> Social</a>
-                    </li>
-                </ul>
-
-                <div class="sideBar__user__edit">
-                    <i class="far fa-edit"></i>
-                </div>
-
-            </div>
-        </div>       
-    </div>
-
-    <div class="content">
-        <!-- <div class="demo-container">
-            <div id="vector-map" dx-vector-map="vectorMapOptions"></div>
-        </div> -->
-    </div>
-    <!-- <nav class="nav">
-        <a class="nav__link" href="#!main">Main</a>
-        <a class="nav__link" href="#!map">Map</a>            
-    </nav>  -->
-    <ng-view></ng-view>  
-    
-
-    <form id="signForm" action="">
-        <div class="block">
-            <h1>Sign In</h1>
-        </div>
-        <div class="block">
-            <div class="icon">
-                <img src="/images/sign/login.png" alt="">
-            </div>
-            <input type="text" placeholder="Username" class="login">
-        </div>
-        <div class="block">
-            <div class="icon">
-                <img src="/images/sign/pass.png" alt="">
-            </div>
-            <input type="password" placeholder="Password" class="login">
-        </div>
-        <input type="button" value="Sign in">
-    </form>     
-    
-
-
-    <script src="/scripts/sideBar/sideBar.js"></script> 
     <script src="scripts/lib/angular.min.js"></script>
     <script src="scripts/lib/angular-route.min.js"></script>
     <script src="https://cdn3.devexpress.com/jslib/19.2.6/js/dx.all.js"></script>
+<!-- users scripts and styles -->
     <script src="scripts/index.js"></script>
-    <script src="scripts/controllers/MapController.js"></script>
-    <script src="scripts/controllers/MainContrioller.js"></script>
+    <script src="scripts/controllers/MapController.js?1235343"></script>
+    <script src="scripts/controllers/SignInController.js?1235343"></script>
+    <!-- <script src="scripts/sideBar/sideBar.js"></script>  -->
 </body>
 </html>

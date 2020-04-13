@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 03 2020 г., 00:46
+-- Время создания: Апр 12 2020 г., 22:56
 -- Версия сервера: 5.7.20-log
 -- Версия PHP: 7.0.26
 
@@ -55,22 +55,27 @@ INSERT INTO `desks` (`id`, `image`, `id_floor`, `id_employee`, `x`, `y`) VALUES
 
 CREATE TABLE `employees` (
   `id` int(8) UNSIGNED NOT NULL,
-  `full_name` varchar(50) NOT NULL COMMENT 'Фамилия, имя, отчество',
+  `surname` varchar(30) NOT NULL,
+  `name` varchar(30) DEFAULT NULL,
+  `patronymic` varchar(30) DEFAULT NULL,
   `post` enum('Директор','Программист','Тестировщик','Аналитик') NOT NULL COMMENT 'Должность',
   `image` varchar(100) NOT NULL DEFAULT '1.jpg',
-  `status` enum('Работает','В отпуске','Болеет','Командировка') DEFAULT 'Работает' COMMENT 'Статус работника'
+  `phone` varchar(20) NOT NULL DEFAULT '',
+  `status` enum('Работает','В отпуске','Болеет','Командировка') DEFAULT 'Работает' COMMENT 'Статус работника',
+  `email` varchar(60) NOT NULL,
+  `password` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `employees`
 --
 
-INSERT INTO `employees` (`id`, `full_name`, `post`, `image`, `status`) VALUES
-(1, 'Зиновьев Бронислав Анатольевич', 'Программист', '1.jpg', 'Работает'),
-(2, 'Лазарев Дональд Викторович', 'Директор', '1.jpg', 'В отпуске'),
-(3, 'Устинов Архип Владимирович', 'Аналитик', '1.jpg', 'Работает'),
-(4, 'Панов Яков Лукьянович', 'Тестировщик', '1.jpg', 'Болеет'),
-(5, 'Мельников Платон Михаилович', 'Программист', '1.jpg', 'Болеет');
+INSERT INTO `employees` (`id`, `surname`, `name`, `patronymic`, `post`, `image`, `phone`, `status`, `email`, `password`) VALUES
+(1, 'Зиновьев', 'Бронислав ', 'Анатольевич', 'Программист', '1.jpg', '7(495)870-78-64', 'Работает', 'aojv@mail.ru', '$2y$10$qCzTSyZNZgbF0E307esJx.XMt6PLre2f2VbiNeaTsl.6b.kvovyK6'),
+(2, 'Лазарев ', 'Дональд ', 'Викторович', 'Директор', '1.jpg', '7(495)933-15-61', 'В отпуске', 'kggfpxw@yandex.ru', '$2y$10$qCzTSyZNZgbF0E307esJx.XMt6PLre2f2VbiNeaTsl.6b.kvovyK6'),
+(3, 'Устинов ', 'Архип ', 'Владимирович', 'Аналитик', '1.jpg', '7(495)331-04-03', 'Работает', 'oxxv@yandex.ru', '$2y$10$qCzTSyZNZgbF0E307esJx.XMt6PLre2f2VbiNeaTsl.6b.kvovyK6'),
+(4, 'Панов ', 'Яков ', 'Лукьянович', 'Тестировщик', '1.jpg', '7(495)723-99-98', 'Болеет', 'f9jxjd14@gmail.com', '$2y$10$qCzTSyZNZgbF0E307esJx.XMt6PLre2f2VbiNeaTsl.6b.kvovyK6'),
+(5, 'Мельников ', 'Платон ', 'Михаилович', 'Программист', '1.jpg', '7(495)795-65-95', 'Болеет', 'p24a@mail.ru', '$2y$10$qCzTSyZNZgbF0E307esJx.XMt6PLre2f2VbiNeaTsl.6b.kvovyK6');
 
 -- --------------------------------------------------------
 

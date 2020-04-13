@@ -1,4 +1,6 @@
 <?php
+
+    session_start();
     require_once 'dbconnect.php';
 
 // вернет массив кординат всех этажей
@@ -144,7 +146,7 @@
             return false;
 
         $desks = $pdo->prepare("
-            SELECT `x`, `y`, `desks`.`image` as `image`, `full_name` AS `user`, `employees`.`image` as `avatar`, `post`
+            SELECT `x`, `y`, `desks`.`image` as `image`, CONCAT(`surname`, ' ', `name`, ' ', `patronymic`) AS `user`, `employees`.`image` as `avatar`, `post`
             FROM `employees` INNER JOIN
                 (`desks` INNER JOIN `floors` ON `desks`.`id_floor` = `floors`.`id`)
             ON `employees`.`id` = `desks`.`id_employee`
@@ -171,5 +173,26 @@
         }
 
         return $result;
+    }
+
+// авторизация
+    function signIn($pdo, $email, $password) {
+        $check = $pdo->prepare('
+            SELECT *
+            FROM `employees`
+            WHERE `email` = ?;
+        ');
+
+        $check->execute([$email]);
+        $check = $check->fetch(PDO::FETCH_ASSOC);
+        
+        if ( password_verify($password, $check['password'])) {
+            unset($check['password']);
+            $_SESSION['user'] = $check;
+            return $check;
+        }
+        else {
+            return false;
+        }
     }
 ?>

@@ -17,11 +17,12 @@
     margin-right: -50%;
     transform: translate(-50%, -50%);
 
-    @media (max-width: 992px){
-        width: 70%;
-    }
+    animation-name: fade;
+    animation-duration:  0.6s; 
+    animation-timing-function: ease-in-out;     
+    visibility: visible !important;
 
-    @media (max-width: 768px){
+    @media (max-width: 992px){
         width: 100%;
     }
 
@@ -36,15 +37,15 @@
     align-items: center;
 
     padding-bottom: 3%;
-}
 
-#signForm .block h1{
-    font-size: 3rem;
-    margin: 0 auto;
-    padding-bottom: 1.5%;
-    padding-left: 6%;
-    padding-right: 6%;
-    border-bottom: 1px solid @sign;
+    h1{
+        font-size: 2.8rem;
+        margin: 0 auto;
+        padding-bottom: 1.5%;
+        padding-left: 2%;
+        padding-right: 2%;
+        border-bottom: 1px solid @sign;
+    }
 }
 
 #signForm .block .icon {
@@ -91,24 +92,33 @@
         padding-left: 0px;
         text-align: center;
     }
+
+    input[type="button"]{
+        background: transparent;
+
+        border: 1px solid @sign;
+        border-radius: 4px;
+        color: @sign;
+        font-size: 2rem;
+        padding: 2% 10%;
+        margin: 0 auto;
+        cursor: pointer;
+    
+        transition: 0.1s;
+        
+        &:hover{
+            background: @sign;
+            color: @white;
+            border: 1px solid @black;
+        }
+    }
 }
 
-#signForm input[type="button"] {
-    background: transparent;
-
-    border: 1px solid @sign;
-    border-radius: 4px;
-    color: @sign;
-    font-size: 2rem;
-    padding: 2% 10%;
-    margin: 0 auto;
-    cursor: pointer;
-
-    transition: 0.1s;
-    
-    &:hover{
-        background: @sign;
-        color: @white;
-        border: 1px solid @black;
-    }
+@keyframes fade {
+    0% {
+        opacity: 0;    
+    } 
+    100% {
+        opacity: 1; 
+    }       
 }

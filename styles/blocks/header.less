@@ -10,6 +10,10 @@
     position: relative;
 
     z-index: 3;
+
+    @media (max-width: 768px){
+       padding: 1rem 0;
+    }
 }
 
 .header__inner{
@@ -28,11 +32,10 @@
     width: 57px;
     height: 57px;
 
-    border-radius: 1.4px;
-
-    // img{
-    //     border-radius: 50%;
-    // }
+    img{
+        width: 57px;
+        height: 57px;
+    }
 }
 
 .user__content{
@@ -76,6 +79,7 @@
 /*Search*/
 .search{
     position: relative;
+
     width: 40rem;
 
     @media (max-width: 650px){
