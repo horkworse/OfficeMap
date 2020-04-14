@@ -26,14 +26,14 @@ MapApp.controller('MapController', function MapController($scope, $http) {
         sideBar.classList.toggle('sideBar-active');
         slideLinks.forEach((link, index) => {
             if (link.style.animation) {
-                link.style.animation = '';
+                link.style.animation = ``;
             }
             else {
                 link.style.animation = `sideBarLinksFade 0.5s ease forwards ${index / 7 + 0.3}s`;
             }
         });
     }
-    
+
     $scope.user = JSON.parse(localStorage.getItem('user'));
 
     $http.post('/includes/dataGetter.php', {desks: true})
