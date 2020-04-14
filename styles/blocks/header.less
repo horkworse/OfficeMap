@@ -12,7 +12,7 @@
     z-index: 3;
 
     @media (max-width: 768px){
-       padding: 1rem 0;
+       padding: 0rem;
     }
 }
 
@@ -40,6 +40,10 @@
 
 .user__content{
     padding-left: 9px;
+
+    @media (max-width: 768px){
+        display: none;
+    }
 }
 
 .user__name{
@@ -47,20 +51,13 @@
 
     font-size: 1.06rem;
     font-weight: 700;
-    line-height: 1.2;
-
-    @media (max-width: 768px){
-        display: none;
-    }
+    line-height: 1.2;  
 }
 
 .user__prof{
     font-size: 0.8rem;
     color: fade(@white, 70%);
 
-    @media (max-width: 768px){
-        display: none;
-    }
 }
 
 /*Logo*/
@@ -96,8 +93,9 @@
     border: 3px solid @white;
     border-radius: 4px;
 
+    transition: background .2s ease;
+
     &:focus{
-        border-color: @black;
         background: @white;
     }
 }

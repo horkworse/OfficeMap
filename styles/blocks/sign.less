@@ -1,6 +1,7 @@
 // main: ../main.less
 #signForm {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     width: 35%;
 
     background: fade(@sign, 10%);
@@ -29,6 +30,26 @@
     @media (max-width: 360px) {
         padding: 6%;
     }
+
+    input[type="button"]{
+        background: transparent;
+
+        border: 1px solid @sign;
+        border-radius: 4px;
+        color: @sign;
+        font-size: 2rem;
+        padding: 2% 10%;
+        margin: 0 auto;
+        cursor: pointer;
+    
+        transition: 0.1s;
+        
+        &:hover{
+            background: @sign;
+            color: @white;
+            border: 1px solid @black;
+        }
+    }
 }
 
 #signForm .block {
@@ -53,17 +74,17 @@
     justify-content: center;
     align-items: center; 
     z-index: 6;
-}
 
-#signForm .block .icon img {
-    width: 110px;
-
-    @media (max-width: 768px){
-        width: 90px;
-    }
-
-    @media (max-width: 360px) {
-        display: none;
+    img {
+        width: 110px;
+    
+        @media (max-width: 768px){
+            width: 90px;
+        }
+    
+        @media (max-width: 360px) {
+            display: none;
+        }
     }
 }
 
@@ -91,26 +112,6 @@
         margin-left: 0px;
         padding-left: 0px;
         text-align: center;
-    }
-
-    input[type="button"]{
-        background: transparent;
-
-        border: 1px solid @sign;
-        border-radius: 4px;
-        color: @sign;
-        font-size: 2rem;
-        padding: 2% 10%;
-        margin: 0 auto;
-        cursor: pointer;
-    
-        transition: 0.1s;
-        
-        &:hover{
-            background: @sign;
-            color: @white;
-            border: 1px solid @black;
-        }
     }
 }
 
