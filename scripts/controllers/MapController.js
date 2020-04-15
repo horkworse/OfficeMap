@@ -62,6 +62,9 @@ MapApp.controller('MapController', function MapController($scope, $http) {
                     return [coordinates[0] * 100, coordinates[1] * 100];
                 }
             },
+            controlBar:{
+                enabled:false
+            },
             layers: [{
                 hoverEnabled: false,
                 dataSource: buildingData,
@@ -105,7 +108,7 @@ MapApp.controller('MapController', function MapController($scope, $http) {
                         post.className = 'post';
                         post.innerText = info.attribute('post') + ' ';
 
-                        name.prepend(post)
+                        name.prepend(post);
                         popUp.append(avatar);
                         popUp.append(name);
                         container.append(popUp);
