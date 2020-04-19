@@ -17,15 +17,17 @@
 /*For slide content*/
 .content{
     transition: 0.5s ease-in;
+    position: relative;
+    z-index: 0;
 }
 
-.content-active{
-    transform: translateX(26.6rem);
+// .content-active{
+//     transform: translateX(26.6rem);
 
-    @media (max-width: 992px){
-        transform: translateX(100%);
-    }
-}
+//     @media (max-width: 992px){
+//         transform: translateX(100%);
+//     }
+// }
 
 @keyframes fadeIn {
     0% {

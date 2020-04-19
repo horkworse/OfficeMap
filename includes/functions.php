@@ -146,7 +146,7 @@
             return false;
 
         $desks = $pdo->prepare("
-            SELECT `x`, `y`, `desks`.`image` as `image`, CONCAT(`surname`, ' ', `name`, ' ', `patronymic`) AS `user`, `employees`.`image` as `avatar`, `post`
+            SELECT `employees`.`id` AS `id`, `x`, `y`, `desks`.`image` as `image`, CONCAT(`surname`, ' ', `name`, ' ', `patronymic`) AS `user`, `employees`.`image` as `avatar`, `post`
             FROM `employees` INNER JOIN
                 (`desks` INNER JOIN `floors` ON `desks`.`id_floor` = `floors`.`id`)
             ON `employees`.`id` = `desks`.`id_employee`
@@ -163,6 +163,7 @@
                     'coordinates' => [ $row['x'], $row['y'] ]
                 ],
                 'properties' => [
+                    'id' => $row['id'],
                     'url' => '/images/'.$row['image'],
                     'user' => $row['user'],
                     'avatar' => $row['avatar'],

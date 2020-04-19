@@ -1,8 +1,9 @@
 "use strict";
-MapApp.controller('MapController', function MapController($scope, $http) {
+MapApp.controller('MapController', function MapController($scope, $http, $location) {
 
+    /*Сайд бар*/
     let slide = () =>{
-        let user = document.querySelector('.user');
+        let user = document.querySelector('.sideBar__open');
         let close = document.querySelector('.sideBar__close');
         let sideBar = document.querySelector('.sideBar__inner');
         let slideLinks = document.querySelectorAll('.sideBar__links li');
@@ -22,11 +23,12 @@ MapApp.controller('MapController', function MapController($scope, $http) {
         }); 
     }
     slide();
+
     function slideFunction(sideBar, slideLinks) {
         sideBar.classList.toggle('sideBar-active');
         slideLinks.forEach((link, index) => {
             if (link.style.animation) {
-                link.style.animation = ``;
+                link.style.animation = '';
             }
             else {
                 link.style.animation = `sideBarLinksFade 0.5s ease forwards ${index / 7 + 0.3}s`;
@@ -34,11 +36,31 @@ MapApp.controller('MapController', function MapController($scope, $http) {
         });
     }
 
+    /* Selct выбор иконки */
+    document.getElementById("statusSelect").addEventListener("change", function(){
+        let st = document.getElementById("statusSelect").value;
+
+        if(+st == 1){
+            document.getElementById('stat').setAttribute("class", "fas fa-fire");
+        }else if(+st == 2){
+            document.getElementById('stat').setAttribute("class", "fas fa-briefcase");
+        }else if(+st == 3){
+            document.getElementById('stat').setAttribute("class", "fas fa-utensils");
+        }else if(+st == 4){
+            document.getElementById('stat').setAttribute("class", "fas fa-wine-bottle");
+        }
+    });
+    
     $scope.user = JSON.parse(localStorage.getItem('user'));
+    $scope.logout = function () {
+        $http.post('/includes/dataGetter.php', {logout: true});
+        localStorage.removeItem('user');
+        $location.path('/sign-in');
+    }
 
     $http.post('/includes/dataGetter.php', {desks: true})
     .then(x => {
-        console.log(x.data);
+        console.log(x.data.desks);
         let buildingData = {
             features: x.data.floor
         };
@@ -52,7 +74,10 @@ MapApp.controller('MapController', function MapController($scope, $http) {
         }
 
         $scope.vectorMapOptions = {
-            maxZoomFactor: 4,
+            controlBar: {
+                enabled: false
+            },
+            maxZoomFactor: 10,
             projection: {
                 to: function (coordinates) {
                     return [coordinates[0] / 100, coordinates[1] / 100];
@@ -61,9 +86,6 @@ MapApp.controller('MapController', function MapController($scope, $http) {
                 from: function (coordinates) {
                     return [coordinates[0] * 100, coordinates[1] * 100];
                 }
-            },
-            controlBar:{
-                enabled:false
             },
             layers: [{
                 hoverEnabled: false,
@@ -86,7 +108,16 @@ MapApp.controller('MapController', function MapController($scope, $http) {
                 size: 60,
                 dataSource: desksData,
                 name: "desks"
-            }],
+            }/*, {
+                type: "user",
+                elementType: "image",
+                dataField: "url",
+                size: 60,
+                dataSource: {
+                    
+                },
+                name: "desks"
+            }*/],
             loadingIndicator: {
                 show: true
             },
@@ -108,7 +139,7 @@ MapApp.controller('MapController', function MapController($scope, $http) {
                         post.className = 'post';
                         post.innerText = info.attribute('post') + ' ';
 
-                        name.prepend(post);
+                        name.prepend(post)
                         popUp.append(avatar);
                         popUp.append(name);
                         container.append(popUp);

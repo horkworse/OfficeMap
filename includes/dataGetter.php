@@ -13,10 +13,25 @@
 		exit();
 	}
 
+	if (isset($request['isUser'])){
+			if (isset($_SESSION['user'])) {
+				echo json_encode($_SESSION['user']);
+			}
+			else {
+				echo json_encode(false);
+			}
+		exit;
+	}
+
+	if (isset($request['logout'])){
+		unset($_SESSION['user']);
+		exit;
+	}	
+
 	if (isset($request['user'])){
 		$email = $request['email'];
 		$password = $request['password'];
-
+		
 		echo json_encode(signIn($pdo, $email, $password));
 		exit;
 	}
