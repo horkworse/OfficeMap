@@ -15,17 +15,16 @@
 <body>
     <ng-view></ng-view>
 
-
-    <script>
+    <script type="text/javascript">
         /*Баг нужно нажать 2 раза почему то*/
-        function toClipboard(el, num) {
-            el.setAttribute('data-clipboard-text',document.querySelectorAll('p input')[num].value);
+        function toClipboard(el) {
+            // el.setAttribute('data-clipboard-text',document.querySelectorAll('li p input')[num].value);
             let clipboard = new ClipboardJS(el);
-        
+            
             clipboard.on('success', function(e) {
                 console.info('Action:', e.action);
                 console.info('Text:', e.text);
-                console.info('Trigger:', e.trigger);
+                console.info('Trigger:', e.trigger);    
             });  
         }
     </script>

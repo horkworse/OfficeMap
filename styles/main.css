@@ -62,17 +62,21 @@ p {
   width: 60px;
   height: 60px;
 }
-.user__avatar:hover .user__nav {
-  display: block;
-  z-index: 9999;
-}
+/*User nav*/
 .user__nav {
+  z-index: 9999;
   display: none;
   background: transparent;
   color: #000000;
   position: relative;
   padding-top: 1rem;
   width: 10rem;
+}
+.user__nav--active {
+  display: block;
+  animation-name: fadeIn;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
 }
 .nav__inner {
   display: flex;

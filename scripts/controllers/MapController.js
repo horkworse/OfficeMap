@@ -1,5 +1,16 @@
 "use strict";
 MapApp.controller('MapController', function MapController($scope, $http, $location) {
+    /*Меню октрытие*/
+    let openNav = () =>{
+        let avatar = document.getElementById('avatar');
+        let user__nav = document.querySelector('.user__nav');
+
+        avatar.addEventListener('click', () => {
+            user__nav.classList.toggle('user__nav--active');
+
+        });  
+    }
+    openNav();
 
     /*Сайд бар*/
     let slide = () =>{
@@ -7,18 +18,19 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
         let close = document.querySelector('.sideBar__close');
         let sideBar = document.querySelector('.sideBar__inner');
         let slideLinks = document.querySelectorAll('.sideBar__links li');
-
-        let cont = document.querySelector('.content');
+        let user__nav = document.querySelector('.user__nav');
+        // let cont = document.querySelector('.content');
 
 
         user.addEventListener('click', () => {
-            cont.classList.toggle('content-active');
+            // cont.classList.toggle('content-active');
+            user__nav.classList.remove('user__nav--active');
             slideFunction(sideBar, slideLinks);
         });  
 
         //Повторение кода, знаю, потом подумаю как избавится, а может просто избавлюсь от крестика
         close.addEventListener('click', () => {
-            cont.classList.toggle('content-active');
+            // cont.classList.toggle('content-active');
             slideFunction(sideBar, slideLinks);
         }); 
     }
@@ -35,7 +47,7 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
             }
         });
     }
-
+    
     /* Selct выбор иконки */
     document.getElementById("statusSelect").addEventListener("change", function(){
         let st = document.getElementById("statusSelect").value;
@@ -50,7 +62,6 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
             document.getElementById('stat').setAttribute("class", "fas fa-wine-bottle");
         }
     });
-
     
     
     $scope.user = JSON.parse(localStorage.getItem('user'));

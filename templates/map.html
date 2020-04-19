@@ -3,12 +3,12 @@
         <div class="header__inner">
             <div class="user">
                 <div class="user__avatar">
-                    <img src="images/users/{{user.image}}" alt="">
+                    <img id="avatar" src="images/users/{{user.image}}" alt="">
                     <div class="user__nav">
                         <div class="nav__inner">
                             <div class="signedAs">
                                 <p>Signed in as</p>
-                                <p>{{user.name}}</p>
+                                <p>{{user.email}}</p>
                             </div>
                             <div class="profile">
                                 <a href="#" class="sideBar__open">My Profile</a>
@@ -53,13 +53,13 @@
             </div>
             <ul class="sideBar__links">
                 <li>
-                    <p><i class="far fa-envelope"></i><input onclick='toClipboard(this, 0)' type="text" name="" value=" {{user.email}}" readonly></p>
+                    <p><i class="far fa-envelope"></i><input onclick='toClipboard(this)' type="text" name="" data-clipboard-text=" {{user.email}}" value=" {{user.email}}" readonly></p>
                 </li>
                 <li>
-                    <p><i class="fas fa-phone-alt"></i><input onclick='toClipboard(this, 1)' type="text" name="" value=" {{user.phone}}" readonly></p>
+                    <p><i class="fas fa-phone-alt"></i><input onclick='toClipboard(this)' type="text" name="" data-clipboard-text="{{user.phone}}" value=" {{user.phone}}" readonly></p>
                 </li>
                 <li>
-                    <p><i class="fab fa-vk"></i><input onclick='toClipboard(this, 2)' type="text" name="" value=" Social" readonly></p>
+                    <p><i class="fab fa-vk"></i><input onclick='toClipboard(this)' type="text" name="" data-clipboard-text="Social" value=" Social" readonly></p>
                 </li>
                 <li>
                     <p><i id="stat" class="fas fa-question"></i> <select id="statusSelect" >
