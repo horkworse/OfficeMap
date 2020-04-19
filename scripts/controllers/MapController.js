@@ -50,6 +50,8 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
             document.getElementById('stat').setAttribute("class", "fas fa-wine-bottle");
         }
     });
+
+    
     
     $scope.user = JSON.parse(localStorage.getItem('user'));
     $scope.logout = function () {

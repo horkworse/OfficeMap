@@ -53,21 +53,21 @@
             </div>
             <ul class="sideBar__links">
                 <li>
-                    <p><i class="far fa-envelope"></i><input type="text" name="" value=" {{user.email}}" readonly></p>
+                    <p><i class="far fa-envelope"></i><input onclick='toClipboard(this, 0)' type="text" name="" value=" {{user.email}}" readonly></p>
                 </li>
                 <li>
-                    <p><i class="fas fa-phone-alt"></i><input type="text" name="" value=" {{user.phone}}" readonly></p>
+                    <p><i class="fas fa-phone-alt"></i><input onclick='toClipboard(this, 1)' type="text" name="" value=" {{user.phone}}" readonly></p>
                 </li>
                 <li>
-                    <p><i class="fab fa-vk"></i><input type="text" name="" value=" Social" readonly></p>
+                    <p><i class="fab fa-vk"></i><input onclick='toClipboard(this, 2)' type="text" name="" value=" Social" readonly></p>
                 </li>
                 <li>
-                    <p><i id="stat" class="fas fa-question"></i><select id="statusSelect" >
-                        <option value="0" selected="selected" disabled="disabled">Статус</option>
-                        <option value="1">Горит все</option>
-                        <option value="2">Занят, но не очень</option>
-                        <option value="3">Кушаю</option>
-                        <option value="4">А что надо работать???</option>
+                    <p><i id="stat" class="fas fa-question"></i> <select id="statusSelect" >
+                        <option value="0" selected="selected" disabled="disabled"> Статус</option>
+                        <option value="1"> Горит все</option>
+                        <option value="2"> Занят, но не очень</option>
+                        <option value="3"> Кушаю</option>
+                        <option value="4"> А что надо работать???</option>
                     </select></p>
                 </li>
             </ul>                    

@@ -334,11 +334,15 @@ p {
   justify-content: space-evenly;
   padding-left: 3.6rem;
   list-style: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
 }
 .sideBar__links li {
   opacity: 0;
   margin-bottom: 3rem;
   font-size: 1.6rem;
+  user-select: none;
   color: rgba(0, 0, 0, 0.5);
   transition: 0.2s;
 }
@@ -368,10 +372,6 @@ p {
   background: transparent;
   border: none;
   cursor: pointer;
-}
-.sideBar__links li a {
-  text-decoration: none;
-  color: black;
 }
 /*edit*/
 .sideBar__user__edit {

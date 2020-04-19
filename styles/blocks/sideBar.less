@@ -114,12 +114,18 @@
     justify-content: space-evenly;
     // align-items: center; 
     padding-left: 3.6rem; 
-    list-style: none;  
+    list-style: none; 
+    
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
 
     li{
         opacity: 0; 
         margin-bottom: 3rem;
         font-size: 1.6rem;
+
+        user-select: none;
 
         color: fade(@black, 50%);
         transition: 0.2s;
@@ -152,11 +158,6 @@
             background: transparent;
             border: none;
             cursor: pointer;
-        }
-    
-        a{
-            text-decoration: none;
-            color: black;
         }
     }
 }
