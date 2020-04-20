@@ -15,10 +15,22 @@
 <body>
     <ng-view></ng-view>
 
+    <script>
+        function editForm(){
+            let form = document.querySelectorAll('.s');
+
+            form.forEach(function(item){
+                item.toggleAttribute('readonly');
+                item.style.cursor = (item.style.cursor == 'text') ? '' : 'text';
+                /*Не работае обратное обращение хз почему с курсором работает а с бордером нет*/
+                item.style.borderBottom  = (item.style.borderBottom  == '1px solid #000') ? '' : '1px solid #000';
+            });      
+        }
+    </script>
+
     <script type="text/javascript">
         /*Баг нужно нажать 2 раза почему то*/
         function toClipboard(el) {
-            // el.setAttribute('data-clipboard-text',document.querySelectorAll('li p input')[num].value);
             let clipboard = new ClipboardJS(el);
             
             clipboard.on('success', function(e) {

@@ -138,6 +138,11 @@
         &:last-child{
             margin-bottom: 0rem;
 
+            i{
+                cursor: default;
+                color: fade(@black, 100%);
+            }
+
             select { 
                 appearance:none;
                 outline:0;
@@ -153,11 +158,18 @@
             color: fade(@black, 100%);
         }
 
-        p input{
-            outline: none;
-            background: transparent;
-            border: none;
-            cursor: pointer;
+        p{
+            i{
+                cursor: pointer;
+            }
+
+            input{
+                outline: none;
+                background: transparent;
+                border: 0;
+                border-bottom: 0;
+                cursor: default;
+            } 
         }
     }
 }

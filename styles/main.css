@@ -361,6 +361,10 @@ p {
 .sideBar__links li:last-child {
   margin-bottom: 0rem;
 }
+.sideBar__links li:last-child i {
+  cursor: default;
+  color: #000000;
+}
 .sideBar__links li:last-child select {
   appearance: none;
   outline: 0;
@@ -373,11 +377,15 @@ p {
 .sideBar__links li:hover {
   color: #000000;
 }
+.sideBar__links li p i {
+  cursor: pointer;
+}
 .sideBar__links li p input {
   outline: none;
   background: transparent;
-  border: none;
-  cursor: pointer;
+  border: 0;
+  border-bottom: 0;
+  cursor: default;
 }
 /*edit*/
 .sideBar__user__edit {

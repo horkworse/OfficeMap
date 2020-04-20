@@ -48,18 +48,18 @@
                 <p>{{user.surname + " " + user.name}}</p>
                 <p>[{{user.post}}]</p>
             </div>
-            <div class="sideBar__user__edit">
+            <div class="sideBar__user__edit" id="edit" onclick="editForm()">
                 <i class="far fa-edit"></i>
             </div>
-            <ul class="sideBar__links">
+            <ul class="sideBar__links" unselectable="on" onselectstart="return false;">
                 <li>
-                    <p><i class="far fa-envelope"></i><input onclick='toClipboard(this)' type="text" name="" data-clipboard-text=" {{user.email}}" value=" {{user.email}}" readonly></p>
+                    <p><i class="far fa-envelope" onclick='toClipboard(this)' data-clipboard-text=" {{user.email}}"></i><input class="s" type="text" name="" value=" {{user.email}}" readonly></p>
                 </li>
                 <li>
-                    <p><i class="fas fa-phone-alt"></i><input onclick='toClipboard(this)' type="text" name="" data-clipboard-text="{{user.phone}}" value=" {{user.phone}}" readonly></p>
+                    <p><i class="fas fa-phone-alt"  onclick='toClipboard(this)' data-clipboard-text=" {{user.phone}}"></i><input class="s" type="text" name=""  value=" {{user.phone}}" readonly></p>
                 </li>
                 <li>
-                    <p><i class="fab fa-vk"></i><input onclick='toClipboard(this)' type="text" name="" data-clipboard-text="Social" value=" Social" readonly></p>
+                    <p><i class="fab fa-vk"  onclick='toClipboard(this)' data-clipboard-text=" Social"></i><input class="s" type="text" name="" value=" Social" readonly></p>
                 </li>
                 <li>
                     <p><i id="stat" class="fas fa-question"></i> <select id="statusSelect" >
