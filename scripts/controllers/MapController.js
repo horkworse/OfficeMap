@@ -7,7 +7,6 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
 
         avatar.addEventListener('click', () => {
             user__nav.classList.toggle('user__nav--active');
-
         });  
     }
     openNav();
@@ -23,14 +22,12 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
 
 
         user.addEventListener('click', () => {
-            // cont.classList.toggle('content-active');
             user__nav.classList.remove('user__nav--active');
             slideFunction(sideBar, slideLinks);
         });  
 
         //Повторение кода, знаю, потом подумаю как избавится, а может просто избавлюсь от крестика
         close.addEventListener('click', () => {
-            // cont.classList.toggle('content-active');
             slideFunction(sideBar, slideLinks);
         }); 
     }

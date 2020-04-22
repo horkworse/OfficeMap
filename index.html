@@ -21,24 +21,40 @@
 
             form.forEach(function(item){
                 item.toggleAttribute('readonly');
+
                 item.style.cursor = (item.style.cursor == 'text') ? '' : 'text';
-                /*Не работае обратное обращение хз почему с курсором работает а с бордером нет*/
-                item.style.borderBottom  = (item.style.borderBottom  == '1px solid #000') ? '' : '1px solid #000';
+                item.style.borderBottom  = (item.style.borderBottom  == '') ? '1px solid #000' : '';
             });      
         }
     </script>
-
     <script type="text/javascript">
         /*Баг нужно нажать 2 раза почему то*/
         function toClipboard(el) {
             let clipboard = new ClipboardJS(el);
             
             clipboard.on('success', function(e) {
+                alert('Скопирован ' + e.text);
                 console.info('Action:', e.action);
                 console.info('Text:', e.text);
                 console.info('Trigger:', e.trigger);    
             });  
         }
+    </script>
+    <script>
+        function onKonamiCode(cb) {
+            var input = '';
+            var key = '38384040373937396665';
+            document.addEventListener('keydown', function (e) {
+                input += ("" + e.keyCode);
+                if (input === key) {
+                    return cb();
+                }
+                if (!key.indexOf(input)) return;
+                    input = ("" + e.keyCode);
+            });
+        }
+
+        onKonamiCode(function () {alert('Ты лох!!!')})
     </script>
     <script src="/scripts/dist/clipboard.min.js"></script>
     <script src="scripts/lib/angular.min.js"></script>
