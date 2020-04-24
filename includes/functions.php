@@ -1,30 +1,6 @@
 <?php
-
     session_start();
     require_once 'dbconnect.php';
-
-// вернет массив кординат всех этажей
-    function getFloors($pdo) {
-        $floors = $pdo->query("
-            SELECT `id`,`floor` as nm
-            FROM `floors`;
-        ");
-
-        $coordinates = $pdo->prepare("
-            SELECT `x`,`y`
-            FROM `floor_coordinates`INNER JOIN `floors` ON `floor_coordinates`.`id_floor` = `floors`.`id`
-            WHERE `id_floor` = ?;
-        ");
-
-        $floors = $floors->fetchAll(PDO::FETCH_ASSOC);
-
-        for ($i = 0; $i < count($floors); $i++) {
-            $coordinates->execute([$floors[$i]['id']]);
-            $floors[$i]['cds'] = $coordinates->fetchAll(PDO::FETCH_NUM);
-        }
-        
-        return $floors;
-    }
 
 // вернет массив кординат конкретного этажа
     function getCurrentFloor($pdo, $floorId) {
@@ -43,40 +19,6 @@
                 'coordinates' => [$floor->fetchAll(PDO::FETCH_NUM)]
             ]
         ]);
-    }
-
-// вернет массив кординат помещений на всех этажах
-    function getRoomsOnFloors($pdo) {
-        
-        $floors = $pdo->query("
-            SELECT `id`,`floor` as nm
-            FROM `floors`;
-        ");
-
-        $rooms = $pdo->prepare("
-            SELECT `id`, `room` as `nm`, `description` as `ds`
-            FROM `rooms`
-            WHERE `id_floor` = ?;
-        ");
-
-        $coordinates = $pdo->prepare("
-            SELECT `x`, `y`
-            FROM `rooms` INNER JOIN `room_coordinates` on `rooms`.`id` = `room_coordinates`.`id_room`
-            WHERE `id_room` = ?;
-        ");
-
-        $floors = $floors->fetchAll(PDO::FETCH_ASSOC);
-
-        for ($i = 0; $i < count($floors); $i++) {
-            $rooms->execute([$floors[$i]['id']]);
-            $floors[$i]['rms'] = $rooms->fetchAll(PDO::FETCH_ASSOC);
-
-            for ($j = 0; $j < count($floors[$i]['rms']); $j++) {
-                $coordinates->execute([$floors[$i]['rms'][$j]['id']]);
-                $floors[$i]['rms'][$j]['cds'] = $coordinates->fetchAll(PDO::FETCH_NUM);
-            }
-        }
-        return $floors;
     }
 
 // вернет массив кординат помещений на конкретном этаже
@@ -118,35 +60,13 @@
         return $result;
     }
 
-// вернет массив кординат столов на всех этажах
-    function getDesksOnFloors($pdo) {
-        $floors = $pdo->query("
-            SELECT `id`,`floor` as nm
-            FROM `floors`;
-        ");
-
-        $desks = $pdo->prepare("
-            SELECT `x`, `y`
-            FROM `desks` INNER JOIN `floors` ON `desks`.`id_floor` = `floors`.`id`
-            WHERE `id_floor` = ?;
-        ");
-
-        $floors = $floors->fetchAll(PDO::FETCH_ASSOC);
-        for ($i = 0; $i < count($floors); $i++) {
-            $desks->execute([$floors[$i]['id']]);
-            $floors[$i]['desks'] = $desks->fetchAll(PDO::FETCH_NUM);
-        }
-
-        return $floors;
-    }
-
 // вернет массив кординат столов на конкретном этаже
     function getDesksOnCurrentFloor($pdo, $floorId) {
         if ($floorId == null)
             return false;
 
         $desks = $pdo->prepare("
-            SELECT `employees`.`id` AS `id`, `x`, `y`, `desks`.`image` as `image`, CONCAT(`surname`, ' ', `name`, ' ', `patronymic`) AS `user`, `employees`.`image` as `avatar`, `post`
+            SELECT `employees`.`id` AS `id`, `x`, `y`, `desks`.`image` as `image`, CONCAT(`surname`, ' ', `name`, ' ', `patronymic`) AS `user`, `social`, `employees`.`image` as `avatar`, `post`, `employees`.`status`
             FROM `employees` INNER JOIN
                 (`desks` INNER JOIN `floors` ON `desks`.`id_floor` = `floors`.`id`)
             ON `employees`.`id` = `desks`.`id_employee`
@@ -167,12 +87,12 @@
                     'url' => '/images/'.$row['image'],
                     'user' => $row['user'],
                     'avatar' => $row['avatar'],
-                    'post' => $row['post']
+                    'post' => $row['post'],
+                    'social' => $row['social'],
+                    'status' => $row['status']
                 ]
-
             ];
         }
-
         return $result;
     }
 
@@ -195,5 +115,17 @@
         else {
             return false;
         }
+    }
+
+// вернет всех пользователей + столы
+    function getAllUsers($pdo) {
+        $users = $pdo->query("
+            SELECT `employees`.`id` AS `id`, `x`, `y`, `employees`.`image` as `image`, CONCAT(`surname`, ' ', `name`, ' ', `patronymic`) AS `user`, `employees`.`image` as `avatar`, `post`, `employees`.`status`
+            FROM `employees` INNER JOIN
+                (`desks` INNER JOIN `floors` ON `desks`.`id_floor` = `floors`.`id`)
+            ON `employees`.`id` = `desks`.`id_employee`
+        ");
+
+        return $users->fetchAll(PDO::FETCH_ASSOC);
     }
 ?>

@@ -8,7 +8,7 @@
 			'floor' => getCurrentFloor($pdo, 1),
 			'rooms' => getRoomsOnCurrentFloor($pdo, 1),
 			'desks' => getDesksOnCurrentFloor($pdo, 1),
-			// 'users' => 
+			'users' => getAllUsers($pdo)
 		];	
 		echo json_encode($dataSet);
 		exit();

@@ -1,6 +1,11 @@
 "use strict";
 MapApp.controller('MapController', function MapController($scope, $http, $location) {
     
+    let config = {
+        maxZoom: 10,
+        iconSize: 20
+    }
+
     /*Меню октрытие*/
     openNav();
 
@@ -29,15 +34,30 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
         
         /* формируем объекты с данными о этаже, комнатах и столах */
         let buildingData = {
-            features: x.data.floor
+            hoverEnabled: false,
+            dataSource: { features: x.data.floor },
+            name: "building"
         };
 
         let roomsData = {
-            features: x.data.rooms
+            color: "#fff",
+            borderColor: "#123424",
+            borderWidth: 1,
+            label: {
+                enabled: true,
+                dataField: "name"
+            },
+            dataSource: { features: x.data.rooms },
+            name: "rooms"
         }
 
         let desksData = {
-            features: x.data.desks
+            type: "marker",
+            elementType: "image",
+            dataField: "url",
+            size: config.iconSize,
+            dataSource: { features: x.data.desks },
+            name: "desks"
         }
 
         /* подгрузка карты */
@@ -47,64 +67,55 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
             },
             maxZoomFactor: 10,
             projection: {
-                to: function (coordinates) {
-                    return [coordinates[0] / 100, coordinates[1] / 100];
-                },
-        
-                from: function (coordinates) {
-                    return [coordinates[0] * 100, coordinates[1] * 100];
-                }
+                to: (coordinates) => [coordinates[0] / 100, coordinates[1] / 100],
+                from: (coordinates) => [coordinates[0] * 100, coordinates[1] * 100]
             },
-            layers: [{
-                hoverEnabled: false,
-                dataSource: buildingData,
-                name: "building"
-            }, {
-                color: "#fff",
-                borderColor: "#123424",
-                borderWidth: 1,
-                label: {
-                    enabled: true,
-                    dataField: "name"
-                },
-                dataSource: roomsData,
-                name: "rooms"
-            }, {
-                type: "marker",
-                elementType: "image",
-                dataField: "url",
-                size: 60,
-                dataSource: desksData,
-                name: "desks"
-            }],
+            layers: [
+                buildingData,
+                roomsData,
+                desksData
+            ],
             loadingIndicator: {
                 show: true
             },
             /* вывод popUp при наведении выши на стол */
             tooltip: {
                 enabled: true,
-                contentTemplate: (info, container) => {
-                    if(info.layer.name === "desks") {
+                contentTemplate: (e, container) => {
+                    if(e.layer.name === "desks") {
                         let popUp = document.createElement('div');
                         popUp.className = 'popUp';
 
                         let avatar = document.createElement('img');
                         avatar.className = 'avatar';
-                        avatar.src = `/images/users/${info.attribute('avatar')}`;
+                        avatar.src = `/images/users/${e.attribute('avatar')}`;
 
                         let name = document.createElement('p');
-                        name.innerText = info.attribute('user');
+                        name.innerText = e.attribute('user');
 
                         let post = document.createElement('span');
                         post.className = 'post';
-                        post.innerText = info.attribute('post') + ' ';
+                        post.innerText = e.attribute('post');
 
-                        name.prepend(post)
+                        let status = document.createElement('span');
+                        status.className = 'post';
+                        status.innerText = e.attribute('status');
+
+                        name.prepend(post);
+                        name.append(status);
                         popUp.append(avatar);
                         popUp.append(name);
                         container.append(popUp);
                     }
                 }
+            },
+            onZoomFactorChanged: function (e) {
+                
+                desksData.size = config.iconSize * e.zoomFactor;
+                e.component.getLayerByName('desks').getElements().forEach((x, i, arr) => {
+                    x.applySettings(desksData);
+                });
+                e.component.render();
             }
         };
     });
