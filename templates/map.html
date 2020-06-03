@@ -21,14 +21,11 @@
                 </div>
                 <div class="search">
                     <form>
-                        <input id="search__input" class="search__input" autocomplete="off" type="text" placeholder="Поиск...">
+                        <input id="search__input" class="search__input" ng-model="searchValue" ng-change=search(searchValue) ng-click=search() autocomplete="off" type="text" placeholder="Поиск...">
                         <input type="hidden" id="userSearchId" value="" ng-model="userDeskId" ng-change="goTo(userDeskId)">
                         <button class="search__button" ng-click="search()" type="submit"></button>
                     </form> 
-                    <div id="search__field">
-                        <ul class="list">
-                        </ul>
-                    </div>
+                    <ul id="search__field"></ul>
                 </div>
             </div>
             <div class="logo"></div>

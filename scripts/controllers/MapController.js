@@ -28,8 +28,6 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
 
     aPanel();
 
-    searchField();
-
     // $http.post('/includes/dataGetter.php', { getStatuses: true })
     // .then(x => {
     //     let data = x.data;
@@ -42,6 +40,7 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
     //     }
     // })
     $scope.userDeskId = 0;
+    $scope.searchValue = "";
     $scope.user = JSON.parse(localStorage.getItem('user'));
 
     $scope.statuses = [
@@ -243,70 +242,56 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
                             desks[i].properties.status = status.name;
                             map.option("layers[2].dataSource", desksData.dataSource);
                             map.render();
-
                             break;
                         }
                     }
                 }
 
                 $scope.search = function () {
-                    let input = document.getElementById('search__input');
+                    let input = document.getElementById("search__input");
+                    let arr = desksData.dataSource.features;
+                    let val = input.value;
+                    let field = document.getElementById('search__field');
+                    
+                    closeAllLists();
 
-                    $http.post('/includes/dataGetter.php', {
-                        search: true,
-                        data: { key: input.value }
-                    })
-                    .then(x => {
-                        let resultList = document.getElementsByClassName('list')[0];
-                        resultList.innerHTML = "";
+                    if (!val) 
+                        return false;
+                    
+                    for (let i = 0; i < arr.length; i++) {
+                        let arrItem = arr[i].properties;
 
-                        x.data.forEach(employee => {
+                        if (arrItem.user.substr(0, val.length).toUpperCase() == val.toUpperCase()||
+                            arrItem.post.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+
                             let item = document.createElement("li");
-                            let name = document.createElement("span");
-                            let post = document.createElement("span");
-                            let status = document.createElement("span");
-                            let link = document.createElement("a");
-
-                            name.innerText = employee.surname + " " + employee.name + " ";
-                            post.innerText = employee.post + " ";
-                            status.innerText = employee.status
-                            
-                            link.append(name, post, status);
-                            link.href = "#";
-                            item.append(link);
-
-                            // console.log(employee.id);
-                            // console.log(item);
-
-                            resultList.append(item);
+                            item.className = "listItems";
+                            item.innerHTML += arrItem.user + " ";
+                            item.innerHTML += arrItem.post;
 
                             item.addEventListener("click", function(e) {
-                                let desks = desksData.dataSource.features;
-                                $scope.userDeskId = employee.id;
-                                console.log(employee.id);
-
-                                // for (let i = 0; i < desks.length; i++) {
-                                //     if (desks[i].properties.id == employee.id) {
-                                        
-                                //         let prevImagePath = desks[i].properties.url;
-                                //         desks[i].properties.url = '/images/selected.png';
-                                //         input.value = item.innerText;
-
-                                //         map.center(desks[i].geometry.coordinates);
-                                //         map.zoomFactor(4);
-                                //         map.option("layers[2].dataSource", desksData.dataSource);
-                                //         map.render();
-
-                                //         setTimeout(() => {
-                                //             desks[i].properties.url = prevImagePath;
-                                //             map.option("layers[2].dataSource", desksData.dataSource);
-                                //             map.render();
-                                //         }, 3000)
-                                //         break;
-                                //     }
-                                // }
+                                input.value = item.innerText;
+                                $scope.searchValue = item.innerText;
                             });
-                        });
+                            field.appendChild(item);
+                        }
+                    }
+                    field.style.display = 'block';
+
+                    function closeAllLists(element) {
+                        let x = document.getElementsByClassName("listItems");
+                        for (let i = 0; i < x.length; i++)
+                            if (element != x[i] && element != input)
+                                x[i].parentNode.removeChild(x[i]);
+                        if (!!element) {
+                            field.style.display = 'none';
+                        }
+                    }
+
+                    document.addEventListener("click", function (e) {
+                        if (e.target == input)
+                            return false;
+                        closeAllLists(e.target);
                     });
                 };
 

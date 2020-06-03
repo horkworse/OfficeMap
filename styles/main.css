@@ -192,21 +192,21 @@ p {
   margin-top: 0.4em;
   padding: 5px;
 }
-#search__field ul {
+#search__field {
   margin-left: 0;
   padding-left: 0;
   padding-bottom: 0;
   margin-bottom: 0;
 }
-#search__field ul a {
+#search__field a {
   text-decoration: none;
   color: rgba(0, 0, 0, 0.7);
   transition: 0.2s;
 }
-#search__field ul a:hover {
+#search__field a:hover {
   color: #000000;
 }
-#search__field ul li {
+#search__field li {
   list-style-type: none;
 }
 .search__field--active {
