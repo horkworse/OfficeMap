@@ -28,17 +28,6 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
 
     aPanel();
 
-    // $http.post('/includes/dataGetter.php', { getStatuses: true })
-    // .then(x => {
-    //     let data = x.data;
-
-    //     for (var i = 0; i < data.length; i++) {
-    //         $scope.statuses.push({
-    //             'name': data[i],
-    //             'value': i
-    //         })
-    //     }
-    // })
     $scope.userDeskId = 0;
     $scope.searchValue = "";
     $scope.user = JSON.parse(localStorage.getItem('user'));
@@ -51,6 +40,10 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
     ];
 
     $scope.status = $scope.statuses.find(item => item.name == $scope.user.status);
+
+    $scope.goTo = (userDeskId) => {
+        console.log(userDeskId);
+    }
 
     changeStatus($scope.status);
 
@@ -247,7 +240,7 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
                     }
                 }
 
-                $scope.search = function () {
+                $scope.search = () => {
                     let input = document.getElementById("search__input");
                     let arr = desksData.dataSource.features;
                     let val = input.value;
@@ -257,11 +250,13 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
 
                     if (!val) 
                         return false;
-                    
+
+                    let desks = desksData.dataSource.features;
+
                     for (let i = 0; i < arr.length; i++) {
                         let arrItem = arr[i].properties;
 
-                        if (arrItem.user.substr(0, val.length).toUpperCase() == val.toUpperCase()||
+                        if (arrItem.user.substr(0, val.length).toUpperCase() == val.toUpperCase() ||
                             arrItem.post.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
 
                             let item = document.createElement("li");
@@ -272,9 +267,32 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
                             item.addEventListener("click", function(e) {
                                 input.value = item.innerText;
                                 $scope.searchValue = item.innerText;
+                                $scope.userDeskId = arrItem.id;
+                                let id = document.getElementById("userSearchId");
+                                id.value = arrItem.id;
+
+                                let prevImagePath = desks[i].properties.url;
+                                desks[i].properties.url = '/images/selected.png';
+
+                                map.center(desks[i].geometry.coordinates);
+                                map.zoomFactor(4);
+                                map.option("layers[2].dataSource", desksData.dataSource);
+                                map.render();
+
+                                setTimeout(() => {
+                                    desks[i].properties.url = prevImagePath;
+                                    map.option("layers[2].dataSource", desksData.dataSource);
+                                    map.render();
+                                }, 3000)
                             });
                             field.appendChild(item);
                         }
+                    }
+                    if (field.children.length == 0) {
+                        let item = document.createElement("li");
+                        item.className = "listItems";
+                        item.innerHTML = "пусто :(";
+                        field.appendChild(item);
                     }
                     field.style.display = 'block';
 
@@ -294,10 +312,6 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
                         closeAllLists(e.target);
                     });
                 };
-
-                $scope.goTo = (userDeskId) => {
-                    
-                }
             },
             onClick: (e) => {
 
