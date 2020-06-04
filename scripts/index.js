@@ -17,6 +17,11 @@ function config($routeProvider, $locationProvider) {
             controller: 'SignInController'
         })
 
+        .when('/a-panel', {
+            templateUrl: '/templates/a-panel.html',
+            controller: 'MapController'
+        })
+
         .otherwise({redirectTo: '/map'});
 }
 

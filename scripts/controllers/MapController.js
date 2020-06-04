@@ -26,7 +26,7 @@ MapApp.controller('MapController', function MapController($scope, $http, $locati
         }); 
     });
 
-    aPanel();
+    // aPanel();
 
     $scope.userDeskId = 0;
     $scope.searchValue = "";
